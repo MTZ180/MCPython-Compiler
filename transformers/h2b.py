@@ -10,7 +10,7 @@ def is_hex(text):
 def hex_to_binary(text):
     """Convert a hexadecimal string to binary"""
 
-    return bin(text)[2:]
+    return bin(int(text, 16))[2:].zfill(16)
 
 
 def convert_code(code, file_path):
@@ -18,9 +18,10 @@ def convert_code(code, file_path):
     
     binary_code = []
     line_index = 0
-    lines = code.split("\n")
+    lines = list(filter(None, code.split("\n")))
 
     for line in lines:
+        line = line.strip()
         line_index += 1
         if len(line) == 4 and is_hex(line):
             binary_code.append(hex_to_binary(line))

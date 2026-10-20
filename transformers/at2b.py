@@ -25,7 +25,7 @@ def compile_line(line):
         case 'ADD' | 'SUB' | 'XNOR' | 'NAND' | 'NOR' | 'XOR' | 'AND' | 'OR':
             binary_line = f"{commands_dict[line[0]]}{line[1][0]:04b}{line[1][1]:04b}{line[1][2]:04b}"
         case 'NOP' | 'RET' | 'HALT':
-            binary_line = f"{commands_dict[line[0]]}"
+            binary_line = f"{commands_dict[line[0]]}000000000000"
         case 'LDI' | 'LOAD' | 'STR':
             binary_line = f"{commands_dict[line[0]]}{line[1][0]:08b}{line[1][1]:04b}"
 
@@ -37,4 +37,4 @@ def compile_code(code):
 
     compiled_code = [compile_line(line) for line in code]
 
-    return compiled_code
+    return "\n".join(compiled_code)

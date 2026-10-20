@@ -10,7 +10,7 @@ def is_binary(text):
 def binary_to_hex(text):
     """Convert a binary-string to hexadecimal"""
 
-    return hex(int(text, 2))[2:]
+    return hex(int(text, 2))[2:].zfill(4)
 
 
 def convert_code(code, file_path):
@@ -18,10 +18,11 @@ def convert_code(code, file_path):
     
     hex_code = []
     line_index = 0
-    lines = code.split("\n")
+    lines = list(filter(None, code.split("\n")))
 
     for line in lines:
         line_index += 1
+        line = line.strip()
         if len(line) == 16 and is_binary(line):
             hex_code.append(binary_to_hex(line))
         elif len(line) == 16:
@@ -31,4 +32,4 @@ def convert_code(code, file_path):
         else:
             return f"Error in file {file_path} line {line_index}:\n[ValueError] The code must contain only binary content.\n[ValueError] A binary instruction must be 16 characters long."
     
-    return "\n".join(hex_code)    
+    return "\n".join(hex_code)
