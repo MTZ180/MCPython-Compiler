@@ -19,7 +19,7 @@ commands_dict = {     # A dictionary containing a binary representation of each 
 
 
 def compile_line(line):
-    """Single-line compilation."""
+    """Compile a single line."""
 
     match line[0]:
         case 'ADD' | 'SUB' | 'XNOR' | 'NAND' | 'NOR' | 'XOR' | 'AND' | 'OR':
@@ -33,7 +33,7 @@ def compile_line(line):
 
 
 def compile_code(code):
-    """Entire code compilation."""
+    """Compile the entire code."""
 
     compiled_code = [compile_line(line) for line in code]
 
